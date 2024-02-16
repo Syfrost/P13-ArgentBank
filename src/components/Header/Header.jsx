@@ -4,6 +4,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSignOut, faUserCircle} from '@fortawesome/free-solid-svg-icons'
 import {useDispatch, useSelector} from "react-redux";
 import {updateToken, updateUser} from "../../store/reducers/UserSlice.js";
+import {resetAccounts} from "../../store/reducers/AccountSlice.js";
 
 export default function Header() {
     const {token, firstName, lastName} = useSelector(state => state.user);
@@ -17,6 +18,7 @@ export default function Header() {
             firstName: '',
             lastName: ''
         }));
+        dispatch(resetAccounts());
     }
 
     return (
@@ -31,11 +33,11 @@ export default function Header() {
                     <nav className="header_nav">
                         <ul className={"header_button"}>
                             {token === null ? (
-                                <li><NavLink to='/login'><FontAwesomeIcon className={"user-icon"} icon={faUserCircle} />Sign In</NavLink></li>
+                                <li className={"main-nav-item"}><NavLink to='/login'><FontAwesomeIcon className={"user-icon"} icon={faUserCircle} />Sign In</NavLink></li>
                             ) : (
                                 <>
-                                    <li><NavLink to='/account'><FontAwesomeIcon className={"user-icon"} icon={faUserCircle} />{firstName}</NavLink></li>
-                                    <li><NavLink to='/' onClick={handleLogout}><FontAwesomeIcon className={"user-icon"} icon={faSignOut} />Sign out</NavLink></li>
+                                    <li className={"main-nav-item"}><NavLink to='/account'><FontAwesomeIcon className={"user-icon"} icon={faUserCircle} />{firstName}</NavLink></li>
+                                    <li className={"main-nav-item"}><NavLink to='/' onClick={handleLogout}><FontAwesomeIcon className={"user-icon"} icon={faSignOut} />Sign out</NavLink></li>
                                 </>
                             )}
                         </ul>

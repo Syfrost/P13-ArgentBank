@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import "./Login.scss";
 import {updateToken, updateUser} from "../../store/reducers/UserSlice.js";
-import Header from "../../components/Header/Header.jsx";
+import {addAccount} from "../../store/reducers/AccountSlice.js";
 
 export default function Login() {
     const [email, setEmail] = useState('');
@@ -48,6 +48,24 @@ export default function Login() {
             const userData = await userResponse.json();
             console.log('yolo', userData)
             dispatch(updateUser(userData.body))
+            dispatch(addAccount({ //DEBUG VALEUR EXEMPLE
+                name: 'Argent Bank Checking',
+                total: '$2,082.79',
+                type: 'Available Balance',
+                transactions: 5
+            }));
+            dispatch(addAccount({ //DEBUG VALEUR EXEMPLE
+                name: 'Argent Bank Savings',
+                total: '$10,928.42',
+                type: 'Available Balance',
+                transactions: 10
+            }));
+            dispatch(addAccount({ //DEBUG VALEUR EXEMPLE
+                name: 'Argent Credit Card',
+                total: '$184.30',
+                type: 'Current Balance',
+                transactions: 3
+            }));
         }
 
     }

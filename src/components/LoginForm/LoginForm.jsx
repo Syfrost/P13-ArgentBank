@@ -1,6 +1,5 @@
 import { FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { loginUser } from '../../store/actions/user.action';
 
 function LoginForm() {
     const [email, setEmail] = useState('');
