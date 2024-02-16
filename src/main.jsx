@@ -5,11 +5,11 @@ import { RouterProvider } from 'react-router';
 import { Provider } from 'react-redux';
 import store from './store/store.js';
 import App from './App.jsx';
-import './index.css';
+import './index.scss';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
-import MyAccount from './pages/MyAccount/MyAccount';
 import Error404 from './pages/Error404/Error404';
+import Account from "./pages/Account/Account.jsx";
 
 const router = createBrowserRouter([
     {
@@ -25,8 +25,8 @@ const router = createBrowserRouter([
                 element: <Login />,
             },
             {
-                path: '/myaccount/',
-                element: <MyAccount />,
+                path: '/account/',
+                element: <Account />,
             },
             {
                 path: '/*',
