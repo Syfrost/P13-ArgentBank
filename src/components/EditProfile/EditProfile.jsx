@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateUser } from '../../store/reducers/UserSlice.js';
+import './EditProfile.scss';
 
 function EditProfile() {
     const { token, firstName, lastName } = useSelector(state => state.user);
@@ -11,6 +12,13 @@ function EditProfile() {
     const dispatch = useDispatch();
 
     const handleSave = async () => {
+        const newFirstName = tempFirstName.length >= 2 ? tempFirstName : firstName;
+        const newLastName = tempLastName.length >= 2 ? tempLastName : lastName;
+
+        if (newFirstName === tempFirstName || newLastName === tempLastName) { //reset temp values
+            setTempFirstName('');
+            setTempLastName('');
+        }
         const response = await fetch(
             "http://localhost:3001/api/v1/user/profile",
             {
@@ -20,7 +28,7 @@ function EditProfile() {
                     "Authorization": `Bearer ${token}`,
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ firstName: tempFirstName, lastName: tempLastName })
+                body: JSON.stringify({ firstName: newFirstName, lastName: newLastName })
             }
         );
         if (response.ok) {
@@ -37,7 +45,7 @@ function EditProfile() {
                 },
             })
             const userData = await userResponse.json();
-            console.log('yolomodifactu', userData)
+            console.log('modifactu', userData)
             dispatch(updateUser(userData.body))
         }
     };
@@ -51,13 +59,19 @@ function EditProfile() {
                         <input type="text" value={tempLastName} onChange={e => setTempLastName(e.target.value)} placeholder={lastName}/>
                     </div>
                     <div>
-                        <button onClick={handleSave}>Save</button>
-                        <button onClick={() => setIsEditing(false)}>Cancel</button>
+                        <button className={"edit-button"} onClick={handleSave}>Save</button>
+                        <button className={"edit-button"} onClick={() => setIsEditing(false)}>Cancel</button>
                     </div>
                 </div>
 
             ) : (
-                <button onClick={() => {setIsEditing(true); setIsConfirmed(false);}}>{isConfirmed ? "Change confirmed" : "Edit Name"}</button>
+                <div className={"edit-profile"}>
+                    <button className={"edit-button"} onClick={() => {
+                        setIsEditing(true);
+                        setIsConfirmed(false);
+                    }}>{isConfirmed ? "Change confirmed" : "Edit Name"}</button>
+                </div>
+
             )}
         </>
     );
