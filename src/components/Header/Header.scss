@@ -12,6 +12,8 @@
   flex-direction: row;
   align-items: center;
   gap: 20px;
+  font-size: 14px;
+  font-weight: 700;
   ul {
     display: flex;
     flex-direction: row;
@@ -25,7 +27,6 @@
       text-align: right;
       font-family: Montserrat, sans-serif;
       white-space: nowrap;
-      font-size: clamp(12px, 3vw, 24px);
     }
     a:hover {
       color: #2c3e50;

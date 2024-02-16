@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import "./Account.scss";
 import {useSelector, useDispatch} from "react-redux";
 import EditProfile from "../../components/EditProfile/EditProfile.jsx";
 import ItemBankAccount from "../../components/ItemBankAccount/ItemBankAccount.jsx";
+import "./Account.scss";
 
 export default function Account() {
     const {token, firstName, lastName, email} = useSelector(state => state.user);
@@ -13,7 +13,7 @@ export default function Account() {
             {token ? (
                 <div className={'home'}>
                     <h1>Welcome back<br/>{firstName} {lastName}!</h1>
-                    <h2>Vous êtes connecté en tant que {email}</h2>
+                    {/*<h2>Vous êtes connecté en tant que {email}</h2>*/}
                     <EditProfile/>
                     {accounts.map((account, index) => (
                         <ItemBankAccount key={index} account={account} />
