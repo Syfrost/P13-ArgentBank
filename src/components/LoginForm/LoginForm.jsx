@@ -1,4 +1,4 @@
-import { FormEvent, useState, useEffect } from 'react';
+import {useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -11,7 +11,7 @@ function LoginForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
-    const { loading, error, token } = useSelector(state => state.user);
+    const { token } = useSelector(state => state.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
